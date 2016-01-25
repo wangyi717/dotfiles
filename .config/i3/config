@@ -1,0 +1,192 @@
+font pango: Source Code Pro Semibold, FontAwesome Regular 9
+
+set $up l
+set $down k
+set $left j
+set $right semicolon
+
+floating_modifier Mod1
+
+bindsym Mod1+Return exec termite
+
+bindsym Mod1+Shift+q kill
+
+bindsym Mod1+d exec rofi -show run
+
+# change focus
+bindsym Mod1+$left focus left
+bindsym Mod1+$down focus down
+bindsym Mod1+$up focus up
+bindsym Mod1+$right focus right
+
+# alternatively, you can use the cursor keys:
+bindsym Mod1+Left focus left
+bindsym Mod1+Down focus down
+bindsym Mod1+Up focus up
+bindsym Mod1+Right focus right
+
+# move focused window
+bindsym Mod1+Shift+$left move left
+bindsym Mod1+Shift+$down move down
+bindsym Mod1+Shift+$up move up
+bindsym Mod1+Shift+$right move right
+
+# alternatively, you can use the cursor keys:
+bindsym Mod1+Shift+Left move left
+bindsym Mod1+Shift+Down move down
+bindsym Mod1+Shift+Up move up
+bindsym Mod1+Shift+Right move right
+
+# split in horizontal orientation
+bindsym Mod1+h split h
+
+# split in vertical orientation
+bindsym Mod1+v split v
+
+# enter fullscreen mode for the focused container
+bindsym Mod1+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym Mod1+s layout stacking
+bindsym Mod1+w layout tabbed
+bindsym Mod1+e layout toggle split
+
+# toggle tiling / floating
+bindsym Mod1+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym Mod1+space focus mode_toggle
+
+# focus the parent container
+bindsym Mod1+a focus parent
+
+# focus the child container
+#bindsym Mod1+d focus child
+
+# move the currently focused window to the scratchpad
+bindsym Mod1+Shift+minus move scratchpad
+
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym Mod1+minus scratchpad show
+
+# workspace settings
+set $WS1 1  
+set $WS2 2  
+set $WS3 3  
+set $WS4 4  
+set $WS5 5  
+set $WS6 6  
+set $WS7 7  
+set $WS8 8  
+set $WS9 9  
+set $WS0 10 <
+
+# switch to workspace
+bindsym Mod1+1 workspace $WS1
+bindsym Mod1+2 workspace $WS2
+bindsym Mod1+3 workspace $WS3
+bindsym Mod1+4 workspace $WS4
+bindsym Mod1+5 workspace $WS5
+bindsym Mod1+6 workspace $WS6
+bindsym Mod1+7 workspace $WS7
+bindsym Mod1+8 workspace $WS8
+bindsym Mod1+9 workspace $WS9
+bindsym Mod1+0 workspace $WS0
+
+# move focused container to workspace
+bindsym Mod1+Shift+1 move container to workspace $WS1
+bindsym Mod1+Shift+2 move container to workspace $WS2
+bindsym Mod1+Shift+3 move container to workspace $WS3
+bindsym Mod1+Shift+4 move container to workspace $WS4
+bindsym Mod1+Shift+5 move container to workspace $WS5
+bindsym Mod1+Shift+6 move container to workspace $WS6
+bindsym Mod1+Shift+7 move container to workspace $WS7
+bindsym Mod1+Shift+8 move container to workspace $WS8
+bindsym Mod1+Shift+9 move container to workspace $WS9
+bindsym Mod1+Shift+0 move container to workspace $WS0
+
+# reload the configuration file
+bindsym Mod1+Shift+c reload
+
+# restart i3 inplace
+bindsym Mod1+Shift+r restart
+
+# exit i3
+bindsym Mod1+Shift+e exec rofi-exit 
+
+# lockscreen
+set $locker ilockit
+
+# resize window (you can also use the mouse for that)
+mode "  " {
+        bindsym $left       resize shrink width 10 px or 10 ppt
+        bindsym $down       resize grow height 10 px or 10 ppt
+        bindsym $up         resize shrink height 10 px or 10 ppt
+        bindsym $right      resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left        resize shrink width 10 px or 10 ppt
+        bindsym Down        resize grow height 10 px or 10 ppt
+        bindsym Up          resize shrink height 10 px or 10 ppt
+        bindsym Right       resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym Mod1+r mode "  "
+
+#i3bar
+bar {
+    status_command i3blocks
+    position top
+    height 21
+    workspace_buttons yes
+    workspace_buttons yes
+    strip_workspace_numbers yes
+    separator_symbol "〉"
+    bindsym button5 nop
+    bindsym button4 nop
+    tray_output eDP1
+    tray_padding 3     
+    colors {
+        separator #586e75 
+        background #2d2d2d
+        statusline #c7c7c7
+        focused_workspace  #586e75 #586e75 #ffffff  
+        active_workspace #2d2d2d #2d2d2d #ffffff
+        inactive_workspace #455057 #455057 #c7c7c7
+        urgent_workspace #ae4544 #ae4544 #ffffff
+    }
+}
+
+# start ups
+exec --no-startup-id compton -b --config ~/.config/compton.conf
+exec --no-startup-id dunst
+exec --no-startup-id feh --bg-fill ~/Wallpapers/shawn.jpg
+exec --no-startup-id fcitx
+exec --no-startup-id xrdb -merge .Xresources
+
+#=======================Style settings========================
+# border
+new_window pixel 4
+new_float pixel 4
+
+# other
+focus_follows_mouse no
+popup_during_fullscreen smart
+force_display_urgency_hint 500 ms
+workspace_auto_back_and_forth no
+
+# i3gaps
+#smart_gaps on
+smart_borders on
+gaps outer 20
+gaps inner 20
+
+# colors
+client.focused #586e75 #586e75 #f9f9f9 #268bd2
+client.focused_inactive #455057 #455057 #c7c7c7 #002b36
+client.unfocused #2d2d2d #2d2d2d #c7c7c7 #002b36
+client.urgent #dc322f #dc322f #f9f9f9 #dc322f
